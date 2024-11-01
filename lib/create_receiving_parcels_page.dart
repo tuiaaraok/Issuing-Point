@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:order/data/boxes.dart';
 import 'package:order/data/parcels.dart';
 
 class CreateReceivingParcelsPage extends StatefulWidget {
+  const CreateReceivingParcelsPage({super.key});
+
   @override
   State<CreateReceivingParcelsPage> createState() =>
       _CreateReceivingParcelsPageState();
@@ -26,7 +26,7 @@ class _CreateReceivingParcelsPageState
   DateTime _selectDate = DateTime.now();
   bool isOpenCalendar = false;
 
-  PageController _pageController =
+  final PageController _pageController =
       PageController(initialPage: DateTime.now().month - 1);
 
   _updateFormCompletion() {
@@ -53,14 +53,14 @@ class _CreateReceivingParcelsPageState
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Column(
             children: [
               SizedBox(
                 height: 75.h,
               ),
-              Container(
+              SizedBox(
                 width: 360.w,
                 child: Text(
                   "Receiving parcels",
@@ -76,7 +76,7 @@ class _CreateReceivingParcelsPageState
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Container(
+                  child: SizedBox(
                     width: 360.w,
                     child: Row(
                       children: [
@@ -100,7 +100,7 @@ class _CreateReceivingParcelsPageState
               !isOpenCalendar
                   ? Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 310.w,
                           child: Text(
                             "Product Name",
@@ -119,9 +119,9 @@ class _CreateReceivingParcelsPageState
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12.r)),
-                              color: Color(0xFFD9D9D9).withOpacity(0.25),
+                              color: const Color(0xFFD9D9D9).withOpacity(0.25),
                               border: Border.all(
-                                  color: Color(0xFF5C1B73), width: 2.w)),
+                                  color: const Color(0xFF5C1B73), width: 2.w)),
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Center(
@@ -152,7 +152,7 @@ class _CreateReceivingParcelsPageState
                         SizedBox(
                           height: 28.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 310.w,
                           child: Text(
                             "Product weight",
@@ -171,9 +171,9 @@ class _CreateReceivingParcelsPageState
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12.r)),
-                              color: Color(0xFFD9D9D9).withOpacity(0.25),
+                              color: const Color(0xFFD9D9D9).withOpacity(0.25),
                               border: Border.all(
-                                  color: Color(0xFF5C1B73), width: 2.w)),
+                                  color: const Color(0xFF5C1B73), width: 2.w)),
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Center(
@@ -204,7 +204,7 @@ class _CreateReceivingParcelsPageState
                         SizedBox(
                           height: 28.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 310.w,
                           child: Text(
                             "Type of goods",
@@ -223,9 +223,9 @@ class _CreateReceivingParcelsPageState
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12.r)),
-                              color: Color(0xFFD9D9D9).withOpacity(0.25),
+                              color: const Color(0xFFD9D9D9).withOpacity(0.25),
                               border: Border.all(
-                                  color: Color(0xFF5C1B73), width: 2.w)),
+                                  color: const Color(0xFF5C1B73), width: 2.w)),
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Center(
@@ -256,7 +256,7 @@ class _CreateReceivingParcelsPageState
                         SizedBox(
                           height: 28.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 310.w,
                           child: Text(
                             "Date of receipt of goods",
@@ -286,7 +286,7 @@ class _CreateReceivingParcelsPageState
                             children: [
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
-                                child: Container(
+                                child: SizedBox(
                                   height: 20.sp,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -364,13 +364,14 @@ class _CreateReceivingParcelsPageState
                                   ),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: 270.h,
                                 child: Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 40.w),
                                   child: PageView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     controller: _pageController,
                                     onPageChanged: (index) {
                                       setState(() {
@@ -407,9 +408,9 @@ class _CreateReceivingParcelsPageState
                         decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(12.r)),
-                            color: Color(0xFFD9D9D9).withOpacity(0.25),
+                            color: const Color(0xFFD9D9D9).withOpacity(0.25),
                             border: Border.all(
-                                color: Color(0xFF5C1B73), width: 2.w)),
+                                color: const Color(0xFF5C1B73), width: 2.w)),
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.w),
                           child: TextField(
@@ -419,7 +420,7 @@ class _CreateReceivingParcelsPageState
                                 border: InputBorder.none, // Убираем обводку
                                 focusedBorder: InputBorder
                                     .none, // Убираем обводку при фокусе
-                                hintText: '12/12/2024',
+                                hintText: '12/12/24',
                                 hintStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
@@ -447,7 +448,7 @@ class _CreateReceivingParcelsPageState
                                 : Icons.keyboard_arrow_down,
                             color: isOpenCalendar
                                 ? Colors.white
-                                : Color(0xFF50275E),
+                                : const Color(0xFF50275E),
                             size: 40.h,
                           ))
                     ],
@@ -457,7 +458,7 @@ class _CreateReceivingParcelsPageState
               SizedBox(
                 height: 28.h,
               ),
-              Container(
+              SizedBox(
                 width: 310.w,
                 child: Text(
                   "Product Id",
@@ -476,12 +477,12 @@ class _CreateReceivingParcelsPageState
                   alignment: Alignment.centerLeft,
                   child: Container(
                     height: 50.h,
-                    width: 130.w,
+                    width: 140.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                        color: Color(0xFFD9D9D9).withOpacity(0.25),
-                        border:
-                            Border.all(color: Color(0xFF5C1B73), width: 2.w)),
+                        color: const Color(0xFFD9D9D9).withOpacity(0.25),
+                        border: Border.all(
+                            color: const Color(0xFF5C1B73), width: 2.w)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: TextField(
@@ -539,7 +540,7 @@ class _CreateReceivingParcelsPageState
                     decoration: BoxDecoration(
                         color: _updateFormCompletion()
                             ? Colors.white
-                            : Color.fromARGB(255, 109, 109, 109),
+                            : const Color.fromARGB(255, 109, 109, 109),
                         borderRadius: BorderRadius.all(Radius.circular(12.r))),
                     child: Center(
                       child: Text(
@@ -597,7 +598,7 @@ class _CreateReceivingParcelsPageState
           child: Padding(
             padding: EdgeInsets.all(8.w),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(50)),
                 border: Border(),
               ),
@@ -620,17 +621,17 @@ class _CreateReceivingParcelsPageState
           onTap: () {
             _selectDate = date;
             dateOfReceiptOfgoodsController.text =
-                DateFormat("d/M/y").format(date);
+                DateFormat("d/M/yy").format(date);
             setState(() {});
           },
           child: Container(
               decoration: BoxDecoration(
                 color: DateFormat("DD MM YY").format(date) ==
                         DateFormat("DD MM YY").format(_selectDate)
-                    ? Color(0xFFFF0000).withOpacity(0.8)
+                    ? const Color(0xFFFF0000).withOpacity(0.8)
                     : Colors.white, // Цвет для дней текущего месяца
-                borderRadius: BorderRadius.all(Radius.circular(50)),
-                border: Border(),
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
+                border: const Border(),
               ),
               child: Center(
                 child: Text(date.day.toString(),
@@ -639,15 +640,12 @@ class _CreateReceivingParcelsPageState
         ),
       );
     }
-    print(calendarCells.length);
-    print((calendarCells.length / 7).toInt() + 1);
 
     int size = calendarCells.length;
-    print((7 * ((size / 7).toInt() + 1)).toString());
-    print((size - (7 * ((size / 7).toInt() + 1))).toString());
+
     // Добавляем дни текущего месяца
     for (int i = 1;
-        size % 7 != 0 ? i <= (7 * ((size / 7).toInt() + 1)) - size : false;
+        size % 7 != 0 ? i <= (7 * (size ~/ 7 + 1)) - size : false;
         i++) {
       DateTime date = DateTime(month.year, month.month + 1, i);
       calendarCells.add(
@@ -658,7 +656,7 @@ class _CreateReceivingParcelsPageState
           child: Padding(
             padding: EdgeInsets.all(8.w),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(50)),
                 border: Border(),
               ),
@@ -674,7 +672,7 @@ class _CreateReceivingParcelsPageState
     }
 
     return GridView.count(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       crossAxisCount: 7,
       childAspectRatio: 1,
@@ -685,8 +683,6 @@ class _CreateReceivingParcelsPageState
 
 extension DateOnlyCompare on DateTime {
   bool isSameDate(DateTime other) {
-    return this.year == other.year &&
-        this.month == other.month &&
-        this.day == other.day;
+    return year == other.year && month == other.month && day == other.day;
   }
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:order/data/boxes.dart';
 import 'package:order/data/parcels.dart';
 
 class OrderIssuance extends StatefulWidget {
+  const OrderIssuance({super.key});
+
   @override
   State<OrderIssuance> createState() => _OrderIssuanceState();
 }
@@ -40,16 +41,17 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                           width: 280.w,
                           height: 50.h,
                           decoration: BoxDecoration(
-                              color: Color(0xFFD9D9D9).withOpacity(0.25),
+                              color: const Color(0xFFD9D9D9).withOpacity(0.25),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12.r)),
                               border: Border.all(
-                                  color: Color(0xFF5C1B73), width: 2.w)),
+                                  color: const Color(0xFF5C1B73), width: 2.w)),
                           child: Center(
                               child: Text(
                             box.getAt(i)!.productNameController.toString(),
                             style: TextStyle(
-                                fontSize: 18.sp, color: Color(0xFF50275E)),
+                                fontSize: 18.sp,
+                                color: const Color(0xFF50275E)),
                           )),
                         ),
                       ),
@@ -58,14 +60,14 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                 }
               }
 
-              return Container(
+              return SizedBox(
                   width: double.infinity,
                   child: SafeArea(
                       child: SingleChildScrollView(
-                          child: Container(
+                          child: SizedBox(
                               width: 390.w,
                               child: Column(children: [
-                                Container(
+                                SizedBox(
                                   width: 360.w,
                                   child: Text(
                                     "Order issuance",
@@ -81,7 +83,7 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                     onTap: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Container(
+                                    child: SizedBox(
                                       width: 360.w,
                                       child: Row(
                                         children: [
@@ -136,7 +138,8 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                                 width: 100.w,
                                                 height: 36.h,
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xFF9200AA),
+                                                    color:
+                                                        const Color(0xFF9200AA),
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
@@ -171,7 +174,7 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 8.h),
-                                                child: Container(
+                                                child: SizedBox(
                                                   width: 280.w,
                                                   child: Text(
                                                     "Product Name",
@@ -187,15 +190,16 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                                 width: 280.w,
                                                 height: 50.h,
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xFFD9D9D9)
-                                                        .withOpacity(0.25),
+                                                    color:
+                                                        const Color(0xFFD9D9D9)
+                                                            .withOpacity(0.25),
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 12.r)),
                                                     border: Border.all(
-                                                        color:
-                                                            Color(0xFF5C1B73),
+                                                        color: const Color(
+                                                            0xFF5C1B73),
                                                         width: 2.w)),
                                                 child: Row(
                                                   mainAxisAlignment:
@@ -206,7 +210,7 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                                       width: 45.h,
                                                     ),
                                                     currentIndex == -1
-                                                        ? Text("")
+                                                        ? const Text("")
                                                         : Text(
                                                             box
                                                                 .getAt(
@@ -215,7 +219,7 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 fontSize: 18.sp,
-                                                                color: Color(
+                                                                color: const Color(
                                                                     0xFF50275E)),
                                                           ),
                                                     IconButton(
@@ -239,7 +243,7 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 8.h),
-                                                child: Container(
+                                                child: SizedBox(
                                                   width: 280.w,
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -271,12 +275,12 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                                                 BorderRadius.all(
                                                                     Radius.circular(
                                                                         12.r)),
-                                                            color: Color(
+                                                            color: const Color(
                                                                     0xFFD9D9D9)
                                                                 .withOpacity(
                                                                     0.25),
                                                             border: Border.all(
-                                                                color: Color(
+                                                                color: const Color(
                                                                     0xFF5C1B73),
                                                                 width: 2.w)),
                                                         child: Padding(
@@ -333,14 +337,14 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 10.h),
-                                                child: Container(
+                                                child: SizedBox(
                                                   width: 268.w,
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Container(
+                                                      SizedBox(
                                                         width: 268.w,
                                                         child: Row(
                                                           children: [
@@ -436,12 +440,13 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                                                   color: productIdController
                                                                               .text ==
                                                                           ""
-                                                                      ? Color.fromARGB(
+                                                                      ? const Color
+                                                                          .fromARGB(
                                                                           255,
                                                                           65,
                                                                           1,
                                                                           75)
-                                                                      : Color(
+                                                                      : const Color(
                                                                           0xFF9200AA),
                                                                 ),
                                                                 child: Center(
@@ -463,7 +468,7 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                                                 ),
                                                               ),
                                                             ),
-                                                            Spacer(),
+                                                            const Spacer(),
                                                             GestureDetector(
                                                               onTap: () {
                                                                 bool isCurrent =
@@ -553,12 +558,13 @@ class _OrderIssuanceState extends State<OrderIssuance> {
                                                                             .r)),
                                                                     color: productIdController.text ==
                                                                             ""
-                                                                        ? Color.fromARGB(
+                                                                        ? const Color
+                                                                            .fromARGB(
                                                                             255,
                                                                             65,
                                                                             1,
                                                                             75)
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xFF9200AA)),
                                                                 child: Center(
                                                                   child: Text(

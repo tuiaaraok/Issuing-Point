@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +13,7 @@ import 'package:order/order_issuance.dart';
 import 'package:order/parcel_list_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({
+  const HomePage({
     super.key,
   });
 
@@ -30,12 +31,10 @@ class _MyHomePageState extends State<HomePage> {
 
     return Opacity(
       opacity: opacity,
-      child: Container(
-        child: Icon(
-          IconsaxPlusLinear.box,
-          color: Colors.black,
-          size: 30.w,
-        ),
+      child: Icon(
+        IconsaxPlusLinear.box,
+        color: Colors.black,
+        size: 30.w,
       ),
     );
   });
@@ -66,14 +65,15 @@ class _MyHomePageState extends State<HomePage> {
                   (parsedDate.isAfter(now) &&
                       parsedDate.isBefore(closestDate!))) {
                 closestDate = parsedDate;
+                closestDate = DateTime(2000 + closestDate!.year,
+                    closestDate!.month, closestDate!.day);
               }
 
               // Выводим ближайшую дату
               if (closestDate != null) {
-                print(
-                    'Ближайшая дата: ${DateFormat('dd.MM.yyyy').format(closestDate!)}');
+                log('Ближайшая дата: ${DateFormat('dd.MM.yyyy').format(closestDate!)}');
               } else {
-                print('Нет будущих дат.');
+                log('Нет будущих дат.');
               }
 
               pending += 1;
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<HomePage> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 30.h),
                   child: GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
                     crossAxisCount: 9,
                     children: calendarCells,
@@ -108,7 +108,8 @@ class _MyHomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute<void>(
-                                builder: (BuildContext context) => InfoPage(),
+                                builder: (BuildContext context) =>
+                                    const InfoPage(),
                               ),
                             );
                           },
@@ -124,7 +125,7 @@ class _MyHomePageState extends State<HomePage> {
                               children: [
                                 Icon(
                                   IconsaxPlusLinear.clipboard_import,
-                                  color: Color(0xFF9200AA),
+                                  color: const Color(0xFF9200AA),
                                   size: 24.w,
                                 ),
                                 Padding(
@@ -133,7 +134,7 @@ class _MyHomePageState extends State<HomePage> {
                                   child: Text(
                                     "Feedback",
                                     style: TextStyle(
-                                        color: Color(0xFF9200AA),
+                                        color: const Color(0xFF9200AA),
                                         fontSize: 18.sp),
                                   ),
                                 )
@@ -144,7 +145,7 @@ class _MyHomePageState extends State<HomePage> {
                       ),
                     ),
                     pending == 0
-                        ? Container(
+                        ? SizedBox(
                             width: 360.w,
                             height: 300.h,
                             child: Stack(
@@ -155,7 +156,7 @@ class _MyHomePageState extends State<HomePage> {
                                   child: Container(
                                     width: 300.h,
                                     height: 300.h,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         image: DecorationImage(
                                             image:
                                                 AssetImage("assets/empty.png"),
@@ -178,7 +179,7 @@ class _MyHomePageState extends State<HomePage> {
                                           child: Text(
                                             "You have no\norders",
                                             style: TextStyle(
-                                                color: Color(0xFF9200AA),
+                                                color: const Color(0xFF9200AA),
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.bold,
                                                 height: 1.h),
@@ -193,7 +194,8 @@ class _MyHomePageState extends State<HomePage> {
                                                   "=(",
                                                   style: TextStyle(
                                                       fontSize: 18.sp,
-                                                      color: Color(0xFF9200AA)
+                                                      color: const Color(
+                                                              0xFF9200AA)
                                                           .withOpacity(0.5),
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -206,7 +208,7 @@ class _MyHomePageState extends State<HomePage> {
                             ),
                           )
                         : closestDate != null
-                            ? Container(
+                            ? SizedBox(
                                 width: 360.w,
                                 height: 300.h,
                                 child: Stack(
@@ -217,7 +219,7 @@ class _MyHomePageState extends State<HomePage> {
                                       child: Container(
                                         width: 250.h,
                                         height: 250.h,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(
                                                     "assets/order.png"),
@@ -239,7 +241,8 @@ class _MyHomePageState extends State<HomePage> {
                                                   .format(closestDate!),
                                               style: TextStyle(
                                                   fontSize: 21.sp,
-                                                  color: Color(0xFF9200AA),
+                                                  color:
+                                                      const Color(0xFF9200AA),
                                                   fontWeight: FontWeight.w600),
                                             ),
                                           )),
@@ -247,7 +250,7 @@ class _MyHomePageState extends State<HomePage> {
                                   ],
                                 ),
                               )
-                            : Container(
+                            : SizedBox(
                                 width: 360.w,
                                 height: 300.h,
                                 child: Stack(
@@ -258,7 +261,7 @@ class _MyHomePageState extends State<HomePage> {
                                       child: Container(
                                         width: 300.h,
                                         height: 300.h,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(
                                                     "assets/empty.png"),
@@ -281,7 +284,8 @@ class _MyHomePageState extends State<HomePage> {
                                               child: Text(
                                                 "You have no\norders",
                                                 style: TextStyle(
-                                                    color: Color(0xFF9200AA),
+                                                    color:
+                                                        const Color(0xFF9200AA),
                                                     fontSize: 18.sp,
                                                     fontWeight: FontWeight.bold,
                                                     height: 1.h),
@@ -296,7 +300,7 @@ class _MyHomePageState extends State<HomePage> {
                                                       "=(",
                                                       style: TextStyle(
                                                           fontSize: 18.sp,
-                                                          color: Color(
+                                                          color: const Color(
                                                                   0xFF9200AA)
                                                               .withOpacity(0.5),
                                                           fontWeight:
@@ -321,7 +325,7 @@ class _MyHomePageState extends State<HomePage> {
                                   context,
                                   MaterialPageRoute<void>(
                                     builder: (BuildContext context) =>
-                                        CreateReceivingParcelsPage(),
+                                        const CreateReceivingParcelsPage(),
                                   ),
                                 );
                               },
@@ -341,7 +345,7 @@ class _MyHomePageState extends State<HomePage> {
                                     children: [
                                       Icon(
                                         IconsaxPlusLinear.box_tick,
-                                        color: Color(0xFF9200AA),
+                                        color: const Color(0xFF9200AA),
                                         size: 30.h,
                                       ),
                                       Text(
@@ -367,7 +371,7 @@ class _MyHomePageState extends State<HomePage> {
                                   context,
                                   MaterialPageRoute<void>(
                                     builder: (BuildContext context) =>
-                                        OrderIssuance(),
+                                        const OrderIssuance(),
                                   ),
                                 );
                               },
@@ -387,7 +391,7 @@ class _MyHomePageState extends State<HomePage> {
                                     children: [
                                       Icon(
                                         IconsaxPlusLinear.convert_3d_cube,
-                                        color: Color(0xFF9200AA),
+                                        color: const Color(0xFF9200AA),
                                         size: 30.h,
                                       ),
                                       Text(
@@ -413,7 +417,7 @@ class _MyHomePageState extends State<HomePage> {
                                   context,
                                   MaterialPageRoute<void>(
                                     builder: (BuildContext context) =>
-                                        ParcelListPage(),
+                                        const ParcelListPage(),
                                   ),
                                 );
                               },
@@ -433,7 +437,7 @@ class _MyHomePageState extends State<HomePage> {
                                     children: [
                                       Icon(
                                         IconsaxPlusLinear.clipboard_text,
-                                        color: Color(0xFF9200AA),
+                                        color: const Color(0xFF9200AA),
                                         size: 30.h,
                                       ),
                                       Text(
@@ -454,10 +458,10 @@ class _MyHomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 20.h),
-                      child: Container(
+                      child: SizedBox(
                         width: 360.w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -475,7 +479,7 @@ class _MyHomePageState extends State<HomePage> {
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 4.h),
                               child: Text(
-                                "Number of parcels issued : ${numberOfParcelsIssued}",
+                                "Number of parcels issued : $numberOfParcelsIssued",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.sp,
@@ -485,7 +489,7 @@ class _MyHomePageState extends State<HomePage> {
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 4.h),
                               child: Text(
-                                "Number of rejections : ${numberOfRejections}",
+                                "Number of rejections : $numberOfRejections",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.sp,
@@ -495,7 +499,7 @@ class _MyHomePageState extends State<HomePage> {
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 4.h),
                               child: Text(
-                                "Pending : ${pending}",
+                                "Pending : $pending",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.sp,

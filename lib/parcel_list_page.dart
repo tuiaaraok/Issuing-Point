@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:order/data/boxes.dart';
 import 'package:order/data/parcels.dart';
 
 class ParcelListPage extends StatefulWidget {
+  const ParcelListPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _ParcelListPageState();
 }
@@ -17,15 +18,15 @@ class _ParcelListPageState extends State<StatefulWidget> {
       body: ValueListenableBuilder(
           valueListenable: Hive.box<Parcels>(HiveBoxes.parcels).listenable(),
           builder: (context, Box<Parcels> box, _) {
-            return Container(
+            return SizedBox(
               width: double.infinity,
               child: SafeArea(
                   child: SingleChildScrollView(
-                child: Container(
+                child: SizedBox(
                   width: 390.w,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: 360.w,
                         child: Text(
                           "Parcel list",
@@ -41,7 +42,7 @@ class _ParcelListPageState extends State<StatefulWidget> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: Container(
+                          child: SizedBox(
                             width: 360.w,
                             child: Row(
                               children: [
@@ -73,11 +74,11 @@ class _ParcelListPageState extends State<StatefulWidget> {
                                   BorderRadius.all(Radius.circular(12.r)),
                               color:
                                   box.getAt(i)!.status.toString() == "Expects"
-                                      ? Color(0xFFC6B200)
+                                      ? const Color(0xFFC6B200)
                                       : box.getAt(i)!.status.toString() ==
                                               "Rejection"
-                                          ? Color(0xFFA21B1B)
-                                          : Color(0xFF31840A),
+                                          ? const Color(0xFFA21B1B)
+                                          : const Color(0xFF31840A),
                             ),
                             child: Padding(
                               padding: EdgeInsets.symmetric(
@@ -91,7 +92,7 @@ class _ParcelListPageState extends State<StatefulWidget> {
                                         .productNameController
                                         .toString(),
                                     style: TextStyle(
-                                        color: Color(0xFFDC08FF),
+                                        color: const Color(0xFFDC08FF),
                                         fontSize: 18.sp,
                                         fontWeight: FontWeight.w600),
                                   ),
@@ -155,7 +156,7 @@ class _ParcelListPageState extends State<StatefulWidget> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Spacer(),
+                                                const Spacer(),
                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,

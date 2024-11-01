@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:order/main.dart';
 import 'package:order/splash_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
 
@@ -25,13 +27,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 150),
       margin: EdgeInsets.symmetric(horizontal: 4.w),
       height: isActive ? 12.0.h : 14.h,
       width: isActive ? 50.w : 14.h,
       decoration: BoxDecoration(
         color: isActive ? Colors.white : Colors.black.withOpacity(0.5),
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
   }
@@ -41,134 +43,134 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
-        child: Container(
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  height: 630.h,
-                  child: PageView(
-                    physics: ClampingScrollPhysics(),
-                    controller: _pageController,
-                    onPageChanged: (int page) {
-                      setState(() {
-                        _currentPage = page;
-                      });
-                    },
-                    children: <Widget>[
-                      FirstWidgetForOnBoardingInfo(
-                        asset_image: 'assets/onboarding_first.png',
-                        title: 'Picking up orders just\ngot a lot easier! ',
-                        subtitle: 'Add and follow the',
-                        subtitle_1: ' Status ',
-                        subtitle_2:
-                            ' of\nthe parcel, also track the total\nnumber of all ',
-                        subtitle_3: 'Parcels',
-                      ),
-                      WidgetForOnBoardingInfo(
-                        asset_image: 'assets/onboarding_second.png',
-                        title: 'Characterize the parcel\nin detail!',
-                        subtitle: "Keep track of your total",
-                        subtitle_1: " Order ",
-                        subtitle_2:
-                            "stats,\ndon't keep them in your head, just\nwrite them ",
-                        subtitle_3: 'Down in the app',
-                      ),
-                    ],
-                  ),
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 30.h),
-                      child: GestureDetector(
-                        onTap: () async {
-                          final Uri _url = Uri.parse('https://flutter.dev');
-                          if (!await launchUrl(_url)) {
-                            throw Exception('Could not launch $_url');
-                          }
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Terms of use",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 6.sp),
-                              child: Container(
-                                width: 1,
-                                height: 12.sp,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              "Privacy Policy",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+        child: Padding(
+          padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              SizedBox(
+                height: 630.h,
+                child: PageView(
+                  physics: const ClampingScrollPhysics(),
+                  controller: _pageController,
+                  onPageChanged: (int page) {
+                    setState(() {
+                      _currentPage = page;
+                    });
+                  },
+                  children: const <Widget>[
+                    FirstWidgetForOnBoardingInfo(
+                      assetImage: 'assets/onboarding_first.png',
+                      title: 'Picking up orders just\ngot a lot easier! ',
+                      subtitle: 'Add and follow the',
+                      subtitle_1: ' Status ',
+                      subtitle_2:
+                          ' of\nthe parcel, also track the total\nnumber of all ',
+                      subtitle_3: 'Parcels',
                     ),
-                    Container(
-                      width: 280.w,
+                    WidgetForOnBoardingInfo(
+                      assetImage: 'assets/onboarding_second.png',
+                      title: 'Characterize the parcel\nin detail!',
+                      subtitle: "Keep track of your total",
+                      subtitle_1: " Order ",
+                      subtitle_2:
+                          "stats,\ndon't keep them in your head, just\nwrite them ",
+                      subtitle_3: 'Down in the app',
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 30.h),
+                    child: GestureDetector(
+                      onTap: () async {
+                        final Uri url = Uri.parse(
+                            'https://docs.google.com/document/d/1VNyCXPAk3TN0fYToZzR01THX91lq-VTApFDHEfl2v3I/mobilebasic');
+                        if (!await launchUrl(url)) {
+                          throw Exception('Could not launch $url');
+                        }
+                      },
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: _buildPageIndicator(),
+                          Text(
+                            "Terms of use",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                            ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              if (_currentPage == 1) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                    builder: (BuildContext context) =>
-                                        SplashScreen(),
-                                  ),
-                                );
-                              }
-                              _pageController.nextPage(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.ease,
-                              );
-                            },
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 6.sp),
                             child: Container(
-                              width: 140.w,
-                              height: 50.h,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12.r))),
-                              child: Center(
-                                child: Text(
-                                  'Next',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 22.sp,
-                                  ),
-                                ),
-                              ),
+                              width: 1,
+                              height: 12.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "Privacy Policy",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                  SizedBox(
+                    width: 280.w,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: _buildPageIndicator(),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            if (_currentPage == 1) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const SplashScreen(),
+                                ),
+                              );
+                            }
+                            _pageController.nextPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease,
+                            );
+                          },
+                          child: Container(
+                            width: 140.w,
+                            height: 50.h,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12.r))),
+                            child: Center(
+                              child: Text(
+                                'Next',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.sp,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),
@@ -183,15 +185,16 @@ class WidgetForOnBoardingInfo extends StatelessWidget {
   final String subtitle_1;
   final String subtitle_2;
   final String subtitle_3;
-  final String asset_image;
+  final String assetImage;
 
-  WidgetForOnBoardingInfo(
-      {required this.title,
+  const WidgetForOnBoardingInfo(
+      {super.key,
+      required this.title,
       required this.subtitle,
       required this.subtitle_1,
       required this.subtitle_2,
       required this.subtitle_3,
-      required this.asset_image});
+      required this.assetImage});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -201,13 +204,13 @@ class WidgetForOnBoardingInfo extends StatelessWidget {
         children: <Widget>[
           Image(
             image: AssetImage(
-              asset_image,
+              assetImage,
             ),
             fit: BoxFit.fitWidth,
             height: 400.h,
             width: 400.h,
           ),
-          Container(
+          SizedBox(
             width: 340.w,
             child: Text(
               title,
@@ -216,7 +219,7 @@ class WidgetForOnBoardingInfo extends StatelessWidget {
             ),
           ),
           SizedBox(height: 15.h),
-          Container(
+          SizedBox(
             width: 340.w,
             child: RichText(
                 text: TextSpan(
@@ -265,15 +268,16 @@ class FirstWidgetForOnBoardingInfo extends StatelessWidget {
   final String subtitle_1;
   final String subtitle_2;
   final String subtitle_3;
-  final String asset_image;
+  final String assetImage;
 
-  FirstWidgetForOnBoardingInfo(
-      {required this.title,
+  const FirstWidgetForOnBoardingInfo(
+      {super.key,
+      required this.title,
       required this.subtitle,
       required this.subtitle_1,
       required this.subtitle_2,
       required this.subtitle_3,
-      required this.asset_image});
+      required this.assetImage});
 
   @override
   Widget build(BuildContext context) {
@@ -284,14 +288,14 @@ class FirstWidgetForOnBoardingInfo extends StatelessWidget {
         children: <Widget>[
           Image(
             image: AssetImage(
-              asset_image,
+              assetImage,
             ),
             fit: BoxFit.fitWidth,
             height: 280.h,
             width: 280.h,
           ),
           SizedBox(height: 125.h),
-          Container(
+          SizedBox(
             width: 340.w,
             child: Text(
               title,
@@ -300,7 +304,7 @@ class FirstWidgetForOnBoardingInfo extends StatelessWidget {
             ),
           ),
           SizedBox(height: 15.h),
-          Container(
+          SizedBox(
             width: 340.w,
             child: RichText(
                 text: TextSpan(
